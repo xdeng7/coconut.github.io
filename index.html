@@ -1,13 +1,26 @@
-
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="Open-Vocabulary Panoptic Segmentation with Text-to-Image Diffusion Models">
-  <meta name="keywords" content="Vision Transformer, Text Supervision">
+        content="Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos.">
+  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Open-Vocabulary Panoptic Segmentation with Text-to-Image Diffusion Models</title>
+  <title>COCONut: Modernizing COCO Segmentation</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
@@ -19,30 +32,14 @@
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
+    <link rel="icon" href="./static/images/favicon.svg">
+
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/3.20.0/gradio.js" ></script>
-  <style>
-
-.src-image{
-  margin-bottom: -4%;
-}
-.dst-image {
-  margin-top:-95%;
-  opacity: 0;
-  transition: 1s ease;
-}
-
-.overlay-image:hover .dst-image {
-  opacity: 1;
-}
-
-</style>
 </head>
 <body>
 
@@ -56,7 +53,7 @@
   </div>
   <div class="navbar-menu">
     <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <a class="navbar-item" href="https://jerryxu.net">
+      <a class="navbar-item" href="https://keunhong.com">
       <span class="icon">
           <i class="fas fa-home"></i>
       </span>
@@ -67,14 +64,17 @@
           More Research
         </a>
         <div class="navbar-dropdown">
-          <a class="navbar-item" href="https://jerryxu.net/ODISE">
-            ODISE
+          <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
           </a>
-          <a class="navbar-item" href="https://jerryxu.net/GroupViT">
-            GroupViT
+          <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
           </a>
-          <a class="navbar-item" href="https://jerryxu.net/VFS">
-            VFS
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
           </a>
         </div>
       </div>
@@ -89,41 +89,34 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-spaced is-1 publication-title">Open-Vocabulary Panoptic Segmentation with Text-to-Image Diffusion Models</h1>
-          <h2 class="subtitle is-5 publication-awards" style="margin-bottom: 12px; margin-top: -12px;">CVPR 2023 Highlight</h2>
+          <h1 class="title is-2 publication-title">COCONut: Modernizing COCO Segmentation</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="https://jerryxu.net">Jiarui Xu</a><sup>1*</sup>,</span>
+              <a href="https://sites.google.com/view/xueqingdeng7/home">Xueqing Deng</a>,</span>
             <span class="author-block">
-              <a href="https://research.nvidia.com/person/sifei-liu">Sifei Liu</a><sup>2†</sup>,
+              <a href="https://yucornetto.github.io/">Qihang Yu</a>,</span>
+            <span class="author-block">
+              <a href="https://pengwangucla.github.io/peng-wang.github.io/">Peng Wang</a>,
             </span>
             <span class="author-block">
-              <a href="http://latentspace.cc/">Arash Vahdat</a><sup>2†</sup>,
+              <a href="https://xiaohuishen.github.io/">Xiaohui Shen</a>,
             </span>
             <span class="author-block">
-              <a href="https://wonmin-byeon.github.io/">Wonmin Byeon</a><sup>2</sup>,
+              <a href="http://liangchiehchen.com/">Liang-Chieh Chen</a>
             </span>
-            <span class="author-block">
-              <a href="https://xiaolonw.github.io/">Xiaolong Wang</a><sup>1</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://research.nvidia.com/person/shalini-gupta">Shalini De Mello</a><sup>2</sup>
-            </span>
+           
           </div>
 
           <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>University of California San Diego,</span>
-            <span class="author-block"><sup>2</sup>NVIDIA</span>
-          </div>
-          <div class="is-size-6 publication-authors">
-            <span class="author-block">(* the work was done at an internship at NVIDIA, † equal contribution)</span>
+            <span class="author-block">ByteDance Research, USA</span>
+            <!-- <span class="author-block"><sup>2</sup>Google Research</span> -->
           </div>
 
           <div class="column has-text-centered">
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block">
-                <a href="https://arxiv.org/pdf/2303.04803.pdf"
+                <a href="https://arxiv.org/pdf/2011.12948"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -132,7 +125,7 @@
                 </a>
               </span>
               <span class="link-block">
-                <a href="https://arxiv.org/abs/2303.04803"
+                <a href="https://arxiv.org/abs/2011.12948"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
@@ -140,8 +133,9 @@
                   <span>arXiv</span>
                 </a>
               </span>
+              <!-- Video Link. -->
               <!-- <span class="link-block">
-                <a href="https://youtu.be/DtJsWIUTW-Y"
+                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-youtube"></i>
@@ -149,18 +143,9 @@
                   <span>Video</span>
                 </a>
               </span> -->
-              <!-- <span class="link-block">
-                <a href="groupvit_slide.key"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-slideshare"></i>
-                  </span>
-                  <span>Slide</span>
-                </a>
-              </span> -->
               <!-- Code Link. -->
               <span class="link-block">
-                <a href="https://github.com/NVlabs/ODISE"
+                <a href="https://github.com/xdeng7/coconut.git"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
@@ -168,16 +153,16 @@
                   <span>Code</span>
                   </a>
               </span>
-
+              <!-- Dataset Link. -->
               <span class="link-block">
-                <a href="https://huggingface.co/spaces/xvjiarui/ODISE"
+                <a href="https://github.com/google/nerfies/releases/tag/0.1"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
-                      <i class="fa-solid fa-face-smiling-hands"></i>
+                      <i class="far fa-images"></i>
                   </span>
-                  <span>Demo</span>
+                  <span>Data</span>
                   </a>
-              </span>
+            </div>
 
           </div>
         </div>
@@ -187,445 +172,174 @@
 </section>
 
 <section class="hero teaser">
-  <!-- <div class="container is-max-desktop"> -->
+  <div class="container is-max-widescreen">
     <div class="hero-body">
-      <!-- <video autoplay muted loop playsinline height="100%">
-        <source src="figs/teaser_website.m4v" type="video/mp4">
-      </video> -->
-      <div class="container">
-        <div class="carousel results-carousel">
-          <div class="item">
-            <video autoplay muted loop playsinline>
-              <source src="figs/teaser_carousel/00_01.m4v" type="video/mp4">
-            </video>
-          </div>
-          <div class="item">
-            <video autoplay muted loop playsinline>
-              <source src="figs/teaser_carousel/02_03.m4v" type="video/mp4">
-            </video>
-          </div>
-          <div class="item">
-            <video autoplay muted loop playsinline>
-              <source src="figs/teaser_carousel/04_05.m4v" type="video/mp4">
-            </video>
-          </div>
-          <!-- <div class="item">
-            <video autoplay muted loop playsinline>
-              <source src="figs/teaser_carousel/06_07.m4v" type="video/mp4">
-            </video>
-          </div>
-          <div class="item">
-            <video autoplay muted loop playsinline>
-              <source src="figs/teaser_carousel/08_09.m4v" type="video/mp4">
-            </video>
-          </div>
-          <div class="item">
-            <video autoplay muted loop playsinline>
-              <source src="figs/teaser_carousel/10_11.m4v" type="video/mp4">
-            </video>
-          </div> -->
-        </div>
-      </div>
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/teaser_video_v3.mov"
+                type="video/mp4">
+      </video>
       <h2 class="subtitle has-text-centered">
-        <!-- <span style="color: orange; font-weight:bold">Without using any mask annotations</span>, GroupVit groups the image into segments and outputs a semantic segmentation map. -->
-        Segment and categorize any object, even ones not seen during training
+       COCONut dataset and supporting tasks
+<!--         <span class="dnerf">Nerfies</span> turns selfie videos from your phone into
+        free-viewpoint
+        portraits. -->
       </h2>
     </div>
-  <!-- </div> -->
+  </div>
 </section>
 
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <!-- Abstract. -->
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-full-width">
-          <h2 class="title is-3">Abstract</h2>
-          <div class="content has-text-justified">
-          <p>
-              We present <span style="font-weight:bold">ODISE: Open-vocabulary DIffusion-based panoptic SEgmentation</span>, which unifies pre-trained text-image diffusion and discriminative models to perform open-vocabulary panoptic segmentation. 
-              Text-to-image diffusion models have shown the remarkable capability of generating high-quality images with diverse open-vocabulary language descriptions. 
-              This demonstrates that their internal representation space is highly correlated with open concepts in the real world. 
-              Text-image discriminative models like CLIP, on the other hand, are good at classifying images into open-vocabulary labels. 
-              We propose to leverage the frozen representation of both these models to perform panoptic segmentation of any category in the wild. 
-              Our approach outperforms the previous state of the art by significant margins on both open-vocabulary panoptic and semantic segmentation tasks. 
-              In particular, with COCO training only, our method achieves 23.4 PQ and 30.0 mIoU on the ADE20K dataset, with 8.3 PQ and 7.9 mIoU absolute improvement over previous state of the art. 
-          </p>
-          </div>
-        </div>
-    </div>
-    <!--/ Abstract. -->
 
-    <!-- Paper video. -->
+
+<section class="hero is-light is-big", style="margin-top: -35px">
+  <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
-      <!-- <div class="column is-four-fifths"> -->
-      <div class="column is-full-width">
-        <h2 class="title is-3">Video</h2>
-        <div class="publication-video">
-          <!-- <iframe src="https://drive.google.com/file/d/1Z_nx4rbgsLbse39gScquyXZ03_huDN3P/preview"
-                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
-          <iframe src="https://www.youtube.com/embed/Su7p5KYmcII"
-                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
+      <div class="column is-five-fifths">
+        <br>
+        <br>
+        <h2 class="title is-3">🔥 Highlights</h2>
       </div>
     </div>
-    <!--/ Paper video. -->
 
-    <!-- <div class="columns">
-      <div class="column">
-        <details open>
-          <summary class="title is-6 button">Open-Vocabulary Panoptic Segmentation Demo (click to toggle)</summary>
-          <gradio-app src="https://xvjiarui-odise.hf.space"></gradio-app>
-
-          </gradio-app>
-          <script>
-            // listen for load event in the window
-            window.addEventListener("load", function () {
-              // do things after the DOM loads fully
-              document.getElementById("gradio-app").shadowRoot.querySelector(".gradio-container").classList.remove("dark");
-            });
-          </script>
-        </details>
+    <div class="columns is-centered">
+      <div class="column is-five-fifths">
+        <p style="font-size: 20px;">
+        1. COCONut, a modern, universal segmentation dataset that encompasses about 383K images and 5.18M <span style="color: rgb(199, 9, 9)"><b>human-verified</b></span> panoptic segmentation masks, 
+          with <span style="color:rgba(14, 122, 41, 0.904) " ><b>COCONut-val</b></span>, a new validation set as a novel and challenging testbed.</b> 
+        </p>
+        <br>
+        <p style="font-size: 20px;">
+          2. Shows an in-depth error analysis of the COCO dataset's annotations. 
+        </p>
+        <br>
+        <p style="font-size: 20px;">
+          3. By replacing the training dataset, it achieves <span style="color: rgb(75, 11, 69)"><b>4%+ PQ on panoptic segmentation</b></span> , 
+          <span style="color: rgb(131, 102, 7)"><b>new SOTA result on open-vocabulary segmentation</b></span> ,
+           and <span style="color: rgb(4, 23, 107)"><b>better controllable image generation from semantic masks.</b></span> .
+        </p>
+        <br><br>
       </div>
-    </div> -->
-
     </div>
   </div>
 </section>
 
 
 <section class="section">
-  <div class="container is-max-widescreen">
-    <h2 class="title is-3">Problem Overview</h2>
-    <div class="columns">
-      <div class="column">
-        <p>
-            We  propose to learn open-vocabulary panoptic segmentation with the internal representation of text-to-image diffusion models. 
-            K-Means clustering of the diffusion model's internal representation shows semantically differentiated and localized information wherein objects are nicely grouped together (middle figure). 
-            We leverage these dense and rich diffusion features to perform open-vocabulary panoptic segmentation (right figure).
-        </p>
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            In recent decades, the vision community has witnessed remarkable progress in visual recognition, partially owing to advancements in dataset benchmarks.
+            Notably, the established COCO benchmark has propelled the development of modern detection and segmentation systems.
+            However, the COCO segmentation benchmark has seen comparatively slow improvement over the last decade.
+            Originally equipped with coarse polygon annotations for `thing' instances, it gradually incorporated coarse superpixel annotations for `stuff' regions, which were subsequently heuristically amalgamated to yield panoptic segmentation annotations.
+            These annotations, executed by different groups of raters, have resulted not only in coarse segmentation masks but also in inconsistencies between segmentation types.
+            In this study, we undertake a comprehensive reevaluation of the COCO segmentation annotations.
+            By enhancing the annotation quality and expanding the dataset to encompass <b>383K</b> images with more than <b>5.18M</b> panoptic masks, we introduce COCONut, the <b>COCO</b> <b>N</b>ext <b>U</b>niversal segmen<b>T</b>ation dataset.
+            COCONut harmonizes segmentation annotations across semantic, instance, and panoptic segmentation with meticulously crafted high-quality masks, and establishes a robust benchmark for all segmentation tasks.
+            To our knowledge, COCONut stands as the inaugural large-scale universal segmentation dataset, verified by human raters.
+            We anticipate that the release of COCONut will significantly contribute to the community's ability to assess the progress of novel neural networks.
+          </p>
+        </div>
       </div>
     </div>
-    <div class="columns is-centered has-text-centered">
-      <div class="column">
-        <img src="figs/teaser.png" alt="">
-      </div>
-    </div>
-    
-    <h2 class="title is-3">ODISE Training Pipeline</h3>
-    <p> ODISE leverages both text-to-image diffusion model and discriminative model to learn open-vocabulary panoptic segmentation. 
-        We first encode the input image into an implicit text embedding with an implicit captioner (image encoder \(\mathcal{V}\) and MLP). 
-        With the image and its caption as input, we extract their diffusion features from a frozen text-to-image diffusion UNet. 
-        With the UNet features, a mask generator predicts class-agnostic binary masks and their associated mask embedding features.
-        We perform a dot product between the mask embeddings and text embeddings of training category names (<span style="color: #EC603D">red box</span>) or nouns in the image caption (<span style="color: #008F00">green box</span>) to categorize them.
-        The similarity matrix for mask classification is supervised by either cross entropy loss on the ground truth category label (<span style="color: #EC603D">red solid path</span>), or via a grounding loss on the paired image captions (<span style="color: #008F00">green dash path</span>). </p>
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-fullwidth">
-        <video autoplay muted loop playsinline controls>
-          <source src="figs/odise_train2_website.m4v" type="video/mp4">
-        </video>
-      </div>
-    </div>
-    <!-- <h2 class="title is-3">ODISE Inference Pipeline</h3>
-    <p> 
-        To classify each mask embedding into testing categories \(\mathbf{C}_\text{test}\), we compute its similarity with the text encoder \(\mathcal{T}\) embedding of category names.
-        Besides the mask embeddings from text-to-image diffusion model \(\{z_i\}_{i=1}^N\), we also perform mask pooling on the features of image encoder \(\mathcal{V}\) from text-image discriminative model to get \(\{z'_i\}_{i=1}^N\).
-        We fuse the prediction of diffusion model (<span style="color: #005493"> blue solid path </span>) and discriminative model (<span style="color: #7E7E7E"> grey dash path </span>) with geometric mean. 
-      </p>
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-fullwidth">
-        <video autoplay muted loop playsinline controls>
-          <source src="figs/odise_inference_website.mp4" type="video/mp4">
-        </video>
-      </div>
-    </div> -->
-
   </div>
 </section>
+    <!--/ Abstract. -->
 
-<section class="hero is-small">
-  <div class="hero-body">
-  <div class="container is-max-widescreen">
-    <h2 class="title is-3">Qualitative Results</h2>
-    <div class="columns">
-      <div class="column">
-        <p>
-        To demonstrate open-vocabulary recognition capabilities, we merge category names of LVIS, COCO, ADE20K together and perform open-vocabulary inference with \({\sim} 1.5k\) classes directly (hover to view the input image).
-        </p>
-      </div>
-    </div>
 
-    <h3 class="title is-4">Open-Vocabulary Panoptic Segmentation on COCO</h3>
-    <div class="columns">
-      <div class="column overlay-image">
-        <img src="figs/coco_val_supp/000000343561.jpg" class="src-image">
-        <img src="figs/coco_val_supp_gt/000000343561.jpg" class="dst-image">
-      </div>
-      <div class="column overlay-image">
-        <img src="figs/coco_val_supp/000000335800.jpg" class="src-image">
-        <img src="figs/coco_val_supp_gt/000000335800.jpg" class="dst-image">
-      </div>
-    </div>
-    <div class="columns">
-      <div class="column overlay-image">
-        <img src="figs/coco_valtest_main/000000002063.jpg" class="src-image">
-        <img src="figs/coco_valtest_main_gt/000000002063.jpg" class="dst-image">
-      </div>
-      <div class="column overlay-image">
-        <img src="figs/coco_valtest_main/000000067213.jpg" class="src-image">
-        <img src="figs/coco_valtest_main_gt/000000067213.jpg" class="dst-image">
-      </div>
-    </div>
-      <details>
-      <summary class="title is-6 button">Click here for more results on COCO</summary>
-      <div class="columns">
-        <div class="column overlay-image">
-          <img src="figs/coco_val_supp/000000386912.jpg" class="src-image">
-          <img src="figs/coco_val_supp_gt/000000386912.jpg" class="dst-image">
-        </div>
-        <div class="column overlay-image">
-          <img src="figs/coco_val_supp/000000397354.jpg" class="src-image">
-          <img src="figs/coco_val_supp_gt/000000397354.jpg" class="dst-image">
-        </div>
-      </div>
-      <div class="columns">
-        <div class="column overlay-image">
-          <img src="figs/coco_val_supp/000000561958.jpg" class="src-image">
-          <img src="figs/coco_val_supp_gt/000000561958.jpg" class="dst-image">
-        </div>
-        <div class="column overlay-image">
-          <img src="figs/coco_val_supp/000000570448.jpg" class="src-image">
-          <img src="figs/coco_val_supp_gt/000000570448.jpg" class="dst-image">
-        </div>
-      </div>
-      <div class="columns">
-        <div class="column overlay-image">
-          <img src="figs/coco_val_supp/000000373705.jpg" class="src-image">
-          <img src="figs/coco_val_supp_gt/000000373705.jpg" class="dst-image">
-        </div>
-        <div class="column overlay-image">
-          <img src="figs/coco_val_supp/000000374052.jpg" class="src-image">
-          <img src="figs/coco_val_supp_gt/000000374052.jpg" class="dst-image">
-        </div>
-      </div>
-      <div class="columns">
-        <div class="column overlay-image">
-          <img src="figs/coco_valtest_main/000000002925.jpg" class="src-image">
-          <img src="figs/coco_valtest_main_gt/000000002925.jpg" class="dst-image">
-        </div>
-        <div class="column overlay-image">
-          <img src="figs/coco_valtest_main/000000158548.jpg" class="src-image">
-          <img src="figs/coco_valtest_main_gt/000000158548.jpg" class="dst-image">
-        </div>
-      </div>
-      <div class="columns">
-        <div class="column overlay-image">
-          <img src="figs/coco_valtest_main/000000458325.jpg" class="src-image">
-          <img src="figs/coco_valtest_main_gt/000000458325.jpg" class="dst-image">
-        </div>
-        <div class="column overlay-image">
-          <img src="figs/coco_valtest_main/000000553221.jpg" class="src-image">
-          <img src="figs/coco_valtest_main_gt/000000553221.jpg" class="dst-image">
-        </div>
-      </div>
-      <div class="columns">
-        <div class="column overlay-image">
-          <img src="figs/coco_valtest_main/000000001494.jpg" class="src-image">
-          <img src="figs/coco_valtest_main_gt/000000001494.jpg" class="dst-image">
-        </div>
-        <div class="column overlay-image">
-          <img src="figs/coco_valtest_main/000000320743.jpg" class="src-image">
-          <img src="figs/coco_valtest_main_gt/000000320743.jpg" class="dst-image">
-        </div>
-      </div>
-    </details>
 
-    <h3 class="title is-4">Open-Vocabulary Panoptic Segmentation on ADE20K</h3>
-    <div class="columns">
-      <div class="column overlay-image">
-        <img src="figs/ade_val_main/ADE_val_00000521.jpg" class="src-image">
-        <img src="figs/ade_val_main_gt/ADE_val_00000521.jpg" class="dst-image">
-      </div>
-      <div class="column overlay-image">
-        <img src="figs/ade_val_supp/ADE_val_00000634.jpg" class="src-image">
-        <img src="figs/ade_val_supp_gt/ADE_val_00000634.jpg" class="dst-image">
-      </div>
-    </div>
-    <div class="columns">
-      <div class="column overlay-image">
-        <img src="figs/ade_val_supp/ADE_val_00000132.jpg" class="src-image">
-        <img src="figs/ade_val_supp_gt/ADE_val_00000132.jpg" class="dst-image">
-      </div>
-      <div class="column overlay-image">
-        <img src="figs/ade_val_supp/ADE_val_00000544.jpg" class="src-image">
-        <img src="figs/ade_val_supp_gt/ADE_val_00000544.jpg" class="dst-image">
-      </div>
-    </div>
-      <details>
-      <summary class="title is-6 button">Click here for more results on ADE20K</summary>
-      <div class="columns">
-        <div class="column overlay-image">
-          <img src="figs/ade_val_supp/ADE_val_00000530.jpg" class="src-image">
-          <img src="figs/ade_val_supp_gt/ADE_val_00000530.jpg" class="dst-image">
-        </div>
-        <div class="column overlay-image">
-          <img src="figs/ade_val_main/ADE_val_00000057.jpg" class="src-image">
-          <img src="figs/ade_val_main_gt/ADE_val_00000057.jpg" class="dst-image">
-        </div>
-      </div>
-      <div class="columns">
-        <div class="column overlay-image">
-          <img src="figs/ade_val_main/ADE_val_00000717.jpg" class="src-image">
-          <img src="figs/ade_val_main_gt/ADE_val_00000717.jpg" class="dst-image">
-        </div>
-        <div class="column overlay-image">
-          <img src="figs/ade_val_supp/ADE_val_00001273.jpg" class="src-image">
-          <img src="figs/ade_val_supp_gt/ADE_val_00001273.jpg" class="dst-image">
-        </div>
-      </div>
-      <div class="columns">
-        <div class="column overlay-image">
-          <img src="figs/ade_val_supp/ADE_val_00000026.jpg" class="src-image">
-          <img src="figs/ade_val_supp_gt/ADE_val_00000026.jpg" class="dst-image">
-        </div>
-        <div class="column overlay-image">
-          <img src="figs/ade_val_supp/ADE_val_00000056.jpg" class="src-image">
-          <img src="figs/ade_val_supp_gt/ADE_val_00000056.jpg" class="dst-image">
-        </div>
-      </div>
-      <div class="columns">
-        <div class="column overlay-image">
-          <img src="figs/ade_val_supp/ADE_val_00001511.jpg" class="src-image">
-          <img src="figs/ade_val_supp_gt/ADE_val_00001511.jpg" class="dst-image">
-        </div>
-        <div class="column overlay-image">
-          <img src="figs/ade_val_supp/ADE_val_00001519.jpg" class="src-image">
-          <img src="figs/ade_val_supp_gt/ADE_val_00001519.jpg" class="dst-image">
-        </div>
-      </div>
-      <div class="columns">
-        <div class="column overlay-image">
-          <img src="figs/ade_val_supp/ADE_val_00001417.jpg" class="src-image">
-          <img src="figs/ade_val_supp_gt/ADE_val_00001417.jpg" class="dst-image">
-        </div>
-        <div class="column overlay-image">
-          <img src="figs/ade_val_supp/ADE_val_00000265.jpg" class="src-image">
-          <img src="figs/ade_val_supp_gt/ADE_val_00000265.jpg" class="dst-image">
-        </div>
-      </div>
-      <div class="columns">
-        <div class="column overlay-image">
-          <img src="figs/ade_val_supp/ADE_val_00000130.jpg" class="src-image">
-          <img src="figs/ade_val_supp_gt/ADE_val_00000130.jpg" class="dst-image">
-        </div>
-        <div class="column overlay-image">
-          <img src="figs/ade_val_supp/ADE_val_00000146.jpg" class="src-image">
-          <img src="figs/ade_val_supp_gt/ADE_val_00000146.jpg" class="dst-image">
-        </div>
-      </div>
-    </details>
 
-    <h3 class="title is-4">Open-Vocabulary Panoptic Segmentation on Ego4D</h3>
-    <div class="columns">
-      <div class="column overlay-image">
-        <img src="figs/ego4d_supp/0a0e800f-7d2c-4464-996c-47cd2f323350-00420.jpg" class="src-image">
-        <img src="figs/ego4d_supp_gt/0a0e800f-7d2c-4464-996c-47cd2f323350-00420.jpg" class="dst-image">
-      </div>
-      <div class="column overlay-image">
-        <img src="figs/ego4d_supp/0a0f7371-dab8-47fe-a03b-7a92abdbbfda-03780.jpg" class="src-image">
-        <img src="figs/ego4d_supp_gt/0a0f7371-dab8-47fe-a03b-7a92abdbbfda-03780.jpg" class="dst-image">
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3"> COCO VS COCONut dataset and supported tasks</h2>
       </div>
     </div>
-    <div class="columns">
-      <div class="column overlay-image">
-        <img src="figs/ego4d_supp/44045866-ed5e-4758-a136-10cc3719f75b-00060.jpg" class="src-image">
-        <img src="figs/ego4d_supp_gt/44045866-ed5e-4758-a136-10cc3719f75b-00060.jpg" class="dst-image">
-      </div>
-      <div class="column overlay-image">
-        <img src="figs/ego4d_supp/0a6b9994-77e3-4d27-972f-e2ff26635504-03600.jpg" class="src-image">
-        <img src="figs/ego4d_supp_gt/0a6b9994-77e3-4d27-972f-e2ff26635504-03600.jpg" class="dst-image">
-      </div>
-    </div>
-      <details>
-      <summary class="title is-6 button">Click here for more results on Ego4D</summary>
-      <div class="columns">
-        <div class="column overlay-image">
-          <img src="figs/ego4d_supp/0a0e800f-7d2c-4464-996c-47cd2f323350-01320.jpg" class="src-image">
-          <img src="figs/ego4d_supp_gt/0a0e800f-7d2c-4464-996c-47cd2f323350-01320.jpg" class="dst-image">
-        </div>
-        <div class="column overlay-image">
-          <img src="figs/ego4d_supp/0a0e800f-7d2c-4464-996c-47cd2f323350-02880.jpg" class="src-image">
-          <img src="figs/ego4d_supp_gt/0a0e800f-7d2c-4464-996c-47cd2f323350-02880.jpg" class="dst-image">
-        </div>
-      </div>
-      <div class="columns">
-        <div class="column overlay-image">
-          <img src="figs/ego4d_supp/0a0f7371-dab8-47fe-a03b-7a92abdbbfda-08220.jpg" class="src-image">
-          <img src="figs/ego4d_supp_gt/0a0f7371-dab8-47fe-a03b-7a92abdbbfda-08220.jpg" class="dst-image">
-        </div>
-        <div class="column overlay-image">
-          <img src="figs/ego4d_supp/0a0f7371-dab8-47fe-a03b-7a92abdbbfda-12900.jpg" class="src-image">
-          <img src="figs/ego4d_supp_gt/0a0f7371-dab8-47fe-a03b-7a92abdbbfda-12900.jpg" class="dst-image">
-        </div>
-      </div>
-      <div class="columns">
-        <div class="column overlay-image">
-          <img src="figs/ego4d_supp/0a6b9994-77e3-4d27-972f-e2ff26635504-01920.jpg" class="src-image">
-          <img src="figs/ego4d_supp_gt/0a6b9994-77e3-4d27-972f-e2ff26635504-01920.jpg" class="dst-image">
-        </div>
-        <div class="column overlay-image">
-          <img src="figs/ego4d_supp/0a7cd6cc-a9a5-4716-bf77-d8b2b9930232-01620.jpg" class="src-image">
-          <img src="figs/ego4d_supp_gt/0a7cd6cc-a9a5-4716-bf77-d8b2b9930232-01620.jpg" class="dst-image">
-        </div>
-      </div>
-      <div class="columns">
-        <div class="column overlay-image">
-          <img src="figs/ego4d_supp/bf235f87-22f8-406f-8f77-d4525008d5b0-09000.jpg" class="src-image">
-          <img src="figs/ego4d_supp_gt/bf235f87-22f8-406f-8f77-d4525008d5b0-09000.jpg" class="dst-image">
-        </div>
-        <div class="column overlay-image">
-          <img src="figs/ego4d_supp/bf235f87-22f8-406f-8f77-d4525008d5b0-10320.jpg" class="src-image">
-          <img src="figs/ego4d_supp_gt/bf235f87-22f8-406f-8f77-d4525008d5b0-10320.jpg" class="dst-image">
-        </div>
-      </div>
-      <div class="columns">
-        <div class="column overlay-image">
-          <img src="figs/ego4d_supp/0a70a39d-47c8-464d-abae-e4c0f19dd5e5-01860.jpg" class="src-image">
-          <img src="figs/ego4d_supp_gt/0a70a39d-47c8-464d-abae-e4c0f19dd5e5-01860.jpg" class="dst-image">
-        </div>
-        <div class="column overlay-image">
-          <img src="figs/ego4d_supp/0a70a39d-47c8-464d-abae-e4c0f19dd5e5-02760.jpg" class="src-image">
-          <img src="figs/ego4d_supp_gt/0a70a39d-47c8-464d-abae-e4c0f19dd5e5-02760.jpg" class="dst-image">
-        </div>
-      </div>
-      <div class="columns">
-        <div class="column overlay-image">
-          <img src="figs/ego4d_supp/0a70a39d-47c8-464d-abae-e4c0f19dd5e5-04080.jpg" class="src-image">
-          <img src="figs/ego4d_supp_gt/0a70a39d-47c8-464d-abae-e4c0f19dd5e5-04080.jpg" class="dst-image">
-        </div>
-        <div class="column overlay-image">
-          <img src="figs/ego4d_supp/0a70a39d-47c8-464d-abae-e4c0f19dd5e5-12180.jpg" class="src-image">
-          <img src="figs/ego4d_supp_gt/0a70a39d-47c8-464d-abae-e4c0f19dd5e5-12180.jpg" class="dst-image">
-        </div>
-      </div>
-    </details>
+    <div class="columns is-centered ">
+      <div class="column is-full-width">
 
+        <!-- <p style="font-size: 20px;">
+         We compare our COCONut and COCO annotation below.
+        </p>     -->
+        <div class="column is-centered ">
+      <img src="./static/images/coco_coconut_comparison.png"
+                class="interpolation-image"
+                alt="Interpolate start reference image."/>
+
+    </div>
+    <div class="column is-centered ">
+      <img src="./static/images/stuff_coco_coconut_anno_comp.png"
+                class="interpolation-image"
+                alt="Interpolate start reference image."/>
+
+    </div>
   </div>
-  </div>
+</div>
+</div>
 </section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3"> COCONut dataset</h2>
+      </div>
+    </div>
+    <div class="columns is-centered ">
+      <div class="column is-full-width">
+
+        <!-- <p style="font-size: 20px;">
+         We compare our COCONut and COCO annotation below.
+        </p>     -->
+        <div class="column is-centered ">
+      <img src="./static/images/class_dist_2x2.png"
+                class="interpolation-image"
+                alt="Interpolate start reference image."/>
+
+    </div>
+  </div>
+</div>
+</div>
+</section>
+
+<section class="section">
+  <div class="container is-max-widescreen">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3"> Human assisted annotation pipeline</h2>
+      </div>
+    </div>
+
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/pipelinev3.mov"
+                type="video/mp4">
+      </video>
+      <!-- <h2 class="subtitle has-text-centered">
+       COCONut annotations
+      </h2> -->
+    </div>
+  <!-- </div> -->
+</section>
+
+
+
 
 
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>
-@article{xu2022odise,
-  author    = {Xu, Jiarui and Liu, Sifei and Vahdat, Arash and Byeon, Wonmin and Wang, Xiaolong and De Mello, Shalini},
-  title     = {{ODISE: Open-Vocabulary Panoptic Segmentation with Text-to-Image Diffusion Models}},
-  journal   = {arXiv preprint arXiv: 2303.04803},
-  year      = {2023},
-}
-</code></pre>
+    <pre><code>@inproceedings{coconut2024cvpr,
+  author    = {Xueqing Deng, Qihang Yu, Peng Wang, Xiaohui Shen, Liang-Chieh Chen},
+  title     = {COCONut: Modernizing COCO Segmentation},
+  booktitle   = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  year      = {2024},
+}</code></pre>
   </div>
 </section>
 
@@ -634,18 +348,29 @@
   <div class="container">
     <div class="content has-text-centered">
       <a class="icon-link"
-         href="">
+         href="./static/videos/nerfies_paper.pdf">
         <i class="fas fa-file-pdf"></i>
       </a>
-      <a class="icon-link" href="https://github.com/xvjiarui" class="external-link" disabled>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
         <i class="fab fa-github"></i>
       </a>
     </div>
     <div class="columns is-centered">
-      <div class="content">
-        <p>
-          The template is borrowed from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>
-        </p>
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
       </div>
     </div>
   </div>
