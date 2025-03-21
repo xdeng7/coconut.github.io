@@ -213,15 +213,18 @@
     <div class="columns is-centered">
       <div class="column is-five-fifths">
         <p style="font-size: 20px;">
-        1. We propose a caption annotation pipeline leveraging panoptic segmentation to create a <span style="color: rgb(199, 9, 9)"><b>high-quality, detailed</b></span> caption dataset comprising <b>143K</b> annotated images. The resulting annotations are comprehensive, accurate, and include grounding masks, making this dataset substantially larger than recent detailed caption datasets.
+        1. We propose <b>PSG-Bench</b>: a challenging evaluation dataset featuring 5K complex text prompts (2K synthetic + 3K real-world) for advanced T2I models. 
         </p>
         <!-- <br -->
         <br>
         <p style="font-size: 20px;">
-          2. We validate the utility of our proposed dataset across various <span style="color: rgb(131, 202, 7)"><b>fine-grained</b></span> Image-to-Text (I2T) and Text-to-Image (T2I) tasks, including detailed caption generation, <span style="color: rgb(31, 152, 237)"><b>Panoptic segmentation and Grounded Captioning</b></span>, visual question answering (VQA), referring segmentation, and text-conditioned image generation. Experimental results show that our dataset significantly enhances model performance across all these tasks.
-          
+          2.  We propose <b>PSGEval</b>: a novel scene graph-based \textbf{evaluation metric} that comprehensively assesses both foreground and background content generation. We improve the detection base metric using scene graph to provide accurate assessment without using any QG/A methods avoiding the ambiguity in question generation and vision language model bias when answering these questions.
         </p>
-        <br><br>
+        <br>
+        <p style="font-size: 20px;">
+          3. Comprehensive analysis: We rank recent state-of-the-art T2I models based on PSGEval and conduct human alignment studies to validate the effectiveness of our metric.
+        </p>
+        <br>
       </div>
     </div>
   </div>
